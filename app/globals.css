@@ -1,27 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "@dome-layer/dome-ui/tokens.css";
+@import "@dome-layer/dome-ui/components.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ─── Base ───────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg-subtle);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  transition: background var(--duration-default) var(--ease-in-out),
+              color var(--duration-default) var(--ease-in-out);
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* ─── Site header ────────────────────────────────────────────────── */
+.site-header {
+  background: rgba(255, 255, 255, 0.90);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 0.5px solid var(--color-border-default);
+}
+
+[data-theme="dark"] .site-header {
+  background: rgba(10, 10, 10, 0.90);
+  border-bottom-color: var(--color-border-subtle);
+}
+
+/* ─── Focus ring — WCAG 2.1 AA ──────────────────────────────────── */
+*:focus-visible {
+  outline: 2px solid rgba(0, 128, 255, 0.5);
+  outline-offset: 2px;
+}
+
+/* ─── Skeleton shimmer ───────────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-muted)   25%,
+    var(--color-bg-subtle)  50%,
+    var(--color-bg-muted)   75%
+  );
+  background-size: 400px 100%;
+  animation: shimmer 1.4s linear infinite;
+  border-radius: 4px;
+}
+
+/* ─── Staggered section fade-in ─────────────────────────────────── */
+.section-animate {
+  opacity: 0;
+  animation: fadeUp 0.4s ease forwards;
+}
+.section-delay-0 { animation-delay: 0ms; }
+.section-delay-1 { animation-delay: 150ms; }
+.section-delay-2 { animation-delay: 300ms; }
+.section-delay-3 { animation-delay: 450ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .section-animate,
+  .skeleton {
+    animation: none;
+    opacity: 1;
   }
 }

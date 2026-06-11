@@ -1,0 +1,39 @@
+name: ci
+
+on:
+  push:
+    branches: [main, staging]
+  pull_request:
+    branches: [main, staging]
+
+jobs:
+  frontend-check:
+    name: Frontend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint (eslint)
+        run: npm run lint
+      - name: Type check (tsc)
+        run: npx tsc -b --noEmit
+      - name: Build (next build)
+        run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
+          # Sentry vars need a value for the build step; empty string is fine.
+          NEXT_PUBLIC_SENTRY_DSN: ""
+          NEXT_PUBLIC_SENTRY_ENVIRONMENT: ci
+          # Supabase vars must be non-empty for the build (NEXT_PUBLIC_ vars are
+          # validated at build time by Next.js when referenced in code).
+          NEXT_PUBLIC_SUPABASE_URL: "https://placeholder.supabase.co"
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: "ci-placeholder"
+          SUPABASE_SERVICE_ROLE_KEY: "ci-placeholder"
+      - name: Security audit (npm audit)
+        # Gate on production deps only — dev tool advisories don't ship to users.
+        run: npm audit --omit=dev --audit-level=high
