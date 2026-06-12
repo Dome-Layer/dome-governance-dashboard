@@ -36,7 +36,4 @@ jobs:
           SUPABASE_SERVICE_ROLE_KEY: "ci-placeholder"
       - name: Security audit (npm audit)
         # Gate on production deps only — dev tool advisories don't ship to users.
-        # Next.js 14.x carries high-severity CVEs (DoS, XSS) fixed only in Next.js
-        # 16.x — a breaking-change upgrade deferred to a dedicated sprint.
-        # Block on critical only until the upgrade lands.
-        run: npm audit --omit=dev --audit-level=critical
+        run: npm audit --omit=dev --audit-level=high
