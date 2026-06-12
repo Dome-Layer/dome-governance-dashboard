@@ -1,15 +1,17 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-// Nonce-based CSP — no 'unsafe-eval' (no Mermaid in P6).
-// Dropping 'unsafe-eval' makes P6's CSP stricter than the tool frontends.
+// Nonce-based CSP. No 'unsafe-eval' (no Mermaid in P6).
+// 'wasm-unsafe-eval' is required for @react-pdf/renderer — it compiles a WASM
+// font-subsetting module at runtime. This keyword is distinct from 'unsafe-eval'
+// and only permits WebAssembly compilation, not arbitrary eval/Function().
 // Supabase direct-read URLs are allowed via *.supabase.co in connect-src.
 export function middleware(request: NextRequest) {
   const nonce = btoa(crypto.randomUUID());
 
   const csp = [
     "default-src 'self'",
-    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'`,
+    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'wasm-unsafe-eval'`,
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "img-src 'self' data: blob:",
     "connect-src 'self' https://*.supabase.co https://*.ingest.de.sentry.io",
