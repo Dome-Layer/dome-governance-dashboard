@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import Link from "next/link";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
-import { StagingBanner, ToolHeader, ToolFooter } from "@dome-layer/dome-ui";
+import { NavHeader } from "@/components/NavHeader";
+import { StagingBanner, ToolFooter } from "@dome-layer/dome-ui";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -41,17 +41,6 @@ const themeScript = `
 })();
 `;
 
-function renderLink(props: {
-  href: string;
-  children: React.ReactNode;
-  className?: string;
-  style?: React.CSSProperties;
-  "aria-label"?: string;
-  onClick?: () => void;
-}) {
-  return <Link href={props.href} className={props.className} style={props.style} aria-label={props["aria-label"]} onClick={props.onClick}>{props.children}</Link>;
-}
-
 export default function RootLayout({
   children,
 }: {
@@ -71,15 +60,7 @@ export default function RootLayout({
       <body className="flex flex-col min-h-screen">
         <StagingBanner environment={process.env.NEXT_PUBLIC_SENTRY_ENVIRONMENT} />
         <AuthProvider>
-          <ToolHeader
-            toolName="Governance Dashboard"
-            renderLink={renderLink}
-            navLinks={[
-              { label: "Events", href: "/events" },
-              { label: "Compliance", href: "/compliance" },
-              { label: "Export", href: "/export" },
-            ]}
-          />
+          <NavHeader />
           {children}
           <ToolFooter toolName="Governance Dashboard" />
         </AuthProvider>
