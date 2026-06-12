@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { AuthGuard } from "@dome-layer/dome-ui";
 import { LayoutGrid, FileText, ShieldCheck, Download } from "lucide-react";
