@@ -68,6 +68,11 @@ body {
 .section-delay-2 { animation-delay: 300ms; }
 .section-delay-3 { animation-delay: 450ms; }
 
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .section-animate,
   .skeleton {
