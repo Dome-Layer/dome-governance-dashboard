@@ -5,6 +5,7 @@ import { ToolHeader } from "@dome-layer/dome-ui";
 
 const navLinks = [
   { label: "Events", href: "/events" },
+  { label: "Workflow Runs", href: "/runs" },
   { label: "Compliance", href: "/compliance" },
   { label: "Export", href: "/export" },
 ];
