@@ -29,6 +29,7 @@ export const AGENT_IDS = [
   "llm-council",
   "document-intelligence",
   "data-intelligence",
+  "agent-flow",
 ] as const;
 
 export type AgentId = (typeof AGENT_IDS)[number];
@@ -38,6 +39,7 @@ export const AGENT_LABELS: Record<string, string> = {
   "llm-council":           "LLM Council",
   "document-intelligence": "Document Intelligence",
   "data-intelligence":     "Data Intelligence",
+  "agent-flow":            "Agent Flow",
 };
 
 export const ACTION_TYPE_LABELS: Record<string, string> = {
@@ -47,6 +49,11 @@ export const ACTION_TYPE_LABELS: Record<string, string> = {
   eval_judgment:       "Eval Judgment",
   dashboard_generation:"Dashboard Gen",
   qa_query:            "Q&A Query",
+  invoice_received:    "Invoice Received",
+  rules_evaluated:     "Rules Evaluated",
+  human_approval:      "Human Approval",
+  invoice_approved:    "Invoice Approved",
+  invoice_rejected:    "Invoice Rejected",
 };
 
 export interface EvalMetrics {
