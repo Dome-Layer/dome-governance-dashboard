@@ -12,10 +12,10 @@ export function middleware(request: NextRequest) {
   const csp = [
     "default-src 'self'",
     `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'wasm-unsafe-eval'`,
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+    "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: blob:",
     "connect-src 'self' https://*.supabase.co https://*.ingest.de.sentry.io",
-    "font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com",
+    "font-src 'self'",
     "frame-ancestors 'none'",
   ].join("; ");
 
