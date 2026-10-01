@@ -16,11 +16,3 @@ export function getSupabaseClient(): SupabaseClient {
     auth: { persistSession: false }, // session owned by dome-auth, not Supabase
   });
 }
-
-// Server-side client using the service role key — bypasses RLS.
-// Only used in Next.js API routes (never client-exposed).
-export function getServiceClient(): SupabaseClient {
-  return createClient(url, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
-    auth: { persistSession: false },
-  });
-}

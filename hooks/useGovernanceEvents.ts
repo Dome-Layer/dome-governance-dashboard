@@ -55,6 +55,12 @@ export function useGovernanceEvent(id: string) {
 
   useEffect(() => {
     async function load() {
+      // The bare /events/_ shell has no id (static export, lib/routeId.ts).
+      if (!id) {
+        setError("Event not found.");
+        setLoading(false);
+        return;
+      }
       setLoading(true);
       const supabase = getSupabaseClient();
       const { data, error: qErr } = await supabase
