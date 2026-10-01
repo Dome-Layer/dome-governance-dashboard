@@ -6,7 +6,7 @@
 /**
  * The Content-Security-Policy. index.ts puts the per-response nonce in place of {NONCE}.
  * Copied from the middleware it replaces (2026-10-01), which is what production sent.
- * 'wasm-unsafe-eval' is kept on purpose (WebAssembly in the export and chart code).
+ * 'wasm-unsafe-eval' is kept on purpose: @react-pdf/renderer (the PDF export) compiles WebAssembly.
  */
 export const CSP_DIRECTIVES = [
   "default-src 'self'",
