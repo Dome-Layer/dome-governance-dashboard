@@ -10,6 +10,7 @@ import {
   type GovernanceEvent,
   type EvalMetrics,
 } from "@/types/governance";
+import { fetchEvalMetrics } from "@/lib/evalMetrics";
 
 interface Aggregates {
   total: number;
@@ -83,9 +84,8 @@ export function ComplianceView() {
   }, []);
 
   useEffect(() => {
-    fetch("/api/eval-metrics")
-      .then((r) => (r.ok ? r.json() : null))
-      .then((d) => setEvalData(d?.results ?? null))
+    fetchEvalMetrics()
+      .then(setEvalData)
       .catch(() => {});
   }, []);
 

@@ -22,6 +22,11 @@ jobs:
         run: npm run lint
       - name: Type check (tsc)
         run: npx tsc -b --noEmit
+      # The Cloudflare Worker in front of the static export (Sprint H phase 2).
+      - name: Type check the Worker
+        run: npm run typecheck:worker
+      - name: Test the Worker (vitest)
+        run: npm test
       - name: Build (next build)
         run: npm run build
         env:
@@ -33,7 +38,6 @@ jobs:
           # validated at build time by Next.js when referenced in code).
           NEXT_PUBLIC_SUPABASE_URL: "https://placeholder.supabase.co"
           NEXT_PUBLIC_SUPABASE_ANON_KEY: "ci-placeholder"
-          SUPABASE_SERVICE_ROLE_KEY: "ci-placeholder"
       - name: Security audit (npm audit)
         # Gate on production deps only — dev tool advisories don't ship to users.
         run: npm audit --omit=dev --audit-level=high

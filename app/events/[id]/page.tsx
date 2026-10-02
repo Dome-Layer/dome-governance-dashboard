@@ -1,19 +1,14 @@
-"use client";
+import EventDetailClient from "./EventDetailClient";
 
-import { use } from "react";
-import { AuthGuard } from "@dome-layer/dome-ui";
-import { useGovernanceEvent } from "@/hooks/useGovernanceEvents";
-import { EventDetail } from "@/components/EventDetail";
+// Static export (Sprint H phase 2): one prebuilt page serves every event id. The Worker maps
+// /events/<id> to /events/_ (worker/site.ts), and EventDetailClient reads the
+// id from the URL. Any other id 404s at build time, which is why dynamicParams is off.
+export const dynamicParams = false;
 
-export default function EventDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params);
-  const { event, loading, error } = useGovernanceEvent(id);
+export function generateStaticParams() {
+  return [{ id: "_" }];
+}
 
-  return (
-    <AuthGuard>
-      <main className="flex-1 max-w-[1152px] mx-auto w-full px-6 md:px-8 py-10">
-        <EventDetail event={event} loading={loading} error={error} />
-      </main>
-    </AuthGuard>
-  );
+export default function Page() {
+  return <EventDetailClient />;
 }
