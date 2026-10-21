@@ -5,7 +5,7 @@ const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
 // Client-side Supabase client authenticated with the dome_auth_token JWT.
-// RLS enforces (select auth.uid()) = user_id — the signed-in user only sees
+// RLS enforces (select auth.uid()) = user_id, so the signed-in user only sees
 // their own governance_events rows automatically.
 export function getSupabaseClient(): SupabaseClient {
   const token = getToken();

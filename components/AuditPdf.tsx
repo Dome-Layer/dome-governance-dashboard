@@ -1,4 +1,4 @@
-// react-pdf/renderer primitives only — no DOM elements.
+// react-pdf/renderer primitives only, no DOM elements.
 import {
   Document,
   Page,
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
 });
 
 function confidenceLabel(c: number | null): string {
-  if (c === null) return "—";
+  if (c === null) return "N/A";
   return `${(c * 100).toFixed(0)}%`;
 }
 
@@ -59,7 +59,7 @@ export function AuditPdfDocument({ events, generatedAt, userEmail, filters }: Pr
         {userEmail && <Text style={styles.subtitle}>User: {userEmail}</Text>}
         {filters?.dateFrom && (
           <Text style={styles.subtitle}>
-            Period: {filters.dateFrom}{filters.dateTo ? ` — ${filters.dateTo}` : ""}
+            Period: {filters.dateFrom}{filters.dateTo ? ` to ${filters.dateTo}` : ""}
           </Text>
         )}
         {filters?.agents?.length && (
