@@ -50,7 +50,7 @@ export default function RunsPage() {
         )}
         {!loading && !error && runs.length === 0 && (
           <p className="text-sm" style={{ color: "var(--color-text-secondary)" }}>
-            No workflow runs yet — they appear once the Agent Flow emits a run.
+            No workflow runs yet. They appear once the Agent Flow emits a run.
           </p>
         )}
 

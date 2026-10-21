@@ -191,7 +191,7 @@ export function ComplianceView() {
 
       {/* Low-confidence events */}
       {agg.lowConfidence.length > 0 && (
-        <Section title={`Low-confidence events (confidence < 65%) — ${agg.lowConfidence.length}`}>
+        <Section title={`Low-confidence events (confidence < 65%): ${agg.lowConfidence.length}`}>
           <div className="space-y-1.5">
             {agg.lowConfidence.slice(0, 10).map((ev) => (
               <Link
@@ -199,7 +199,7 @@ export function ComplianceView() {
                 href={`/events/${ev.id}`}
                 className="flex items-start gap-3 py-2 rounded-dome hover:bg-[var(--color-bg-muted)] px-2 transition-colors"
               >
-                <Badge variant="error">{ev.confidence !== null ? `${(ev.confidence * 100).toFixed(0)}%` : "—"}</Badge>
+                <Badge variant="error">{ev.confidence !== null ? `${(ev.confidence * 100).toFixed(0)}%` : "N/A"}</Badge>
                 <div className="min-w-0">
                   <p className="text-xs leading-snug line-clamp-1" style={{ color: "var(--color-text-primary)" }}>
                     {ev.output_summary}

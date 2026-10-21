@@ -47,7 +47,7 @@ export default function DashboardPage() {
             className="text-sm max-w-xl"
             style={{ color: "var(--color-text-secondary)" }}
           >
-            Audit trail and compliance reporting for all DOME AI tools — Process
+            Audit trail and compliance reporting for all DOME AI tools: Process
             Analyzer, LLM Council, Document Intelligence, and Data Intelligence.
           </p>
         </div>

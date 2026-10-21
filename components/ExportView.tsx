@@ -42,7 +42,7 @@ export function ExportView() {
         return;
       }
 
-      // Dynamic import to avoid SSR — react-pdf needs browser Canvas API.
+      // Dynamic import to avoid SSR: react-pdf needs browser Canvas API.
       const [{ pdf }, { AuditPdfDocument }] = await Promise.all([
         import("@react-pdf/renderer"),
         import("./AuditPdf"),

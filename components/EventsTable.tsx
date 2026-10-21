@@ -111,7 +111,7 @@ export function EventsTable({ events, total, page, onPageChange, loading, error 
                       {(ev.confidence * 100).toFixed(0)}%
                     </Badge>
                   ) : (
-                    <span style={{ color: "var(--color-text-tertiary)" }}>—</span>
+                    <span style={{ color: "var(--color-text-tertiary)" }}>N/A</span>
                   )}
                 </td>
                 <td className="px-4 py-3 whitespace-nowrap">

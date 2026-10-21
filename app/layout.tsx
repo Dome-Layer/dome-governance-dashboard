@@ -21,7 +21,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Governance Dashboard — Dome",
+  title: "Governance Dashboard | DOME",
   description: "Audit trail and compliance reporting for all DOME AI tools.",
   icons: {
     icon: [
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
 };
 
-// Prevents theme flash before first paint — reads dome-theme cookie (shared
+// Prevents a theme flash before first paint: reads dome-theme cookie (shared
 // across all *.domelayer.com subdomains) then falls back to localStorage.
 const themeScript = `
 (function() {

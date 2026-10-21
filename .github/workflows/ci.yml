@@ -39,5 +39,5 @@ jobs:
           NEXT_PUBLIC_SUPABASE_URL: "https://placeholder.supabase.co"
           NEXT_PUBLIC_SUPABASE_ANON_KEY: "ci-placeholder"
       - name: Security audit (npm audit)
-        # Gate on production deps only — dev tool advisories don't ship to users.
+        # Gate on production deps only: dev tool advisories don't ship to users.
         run: npm audit --omit=dev --audit-level=high
