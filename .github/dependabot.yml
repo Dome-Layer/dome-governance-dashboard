@@ -1,0 +1,22 @@
+# Dependency policy: dome-docs compliance/DEPENDENCY_POLICY.md (2026-09-14). CI's npm audit gates
+# the shipped surface; Dependabot keeps the rest fresh, quietly: grouped minor and patch updates
+# monthly, no majors (they need a deliberate upgrade), and dome-ui is pinned by tag on purpose.
+# Alerts stay on. This file is read from main only.
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    open-pull-requests-limit: 5
+    groups:
+      npm-minor-patch:
+        update-types: ["minor", "patch"]
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@dome-layer/dome-ui"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
