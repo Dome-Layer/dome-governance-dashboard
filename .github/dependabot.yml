@@ -6,6 +6,7 @@ version: 2
 updates:
   - package-ecosystem: "npm"
     directory: "/"
+    target-branch: "staging"
     schedule:
       interval: "monthly"
     open-pull-requests-limit: 5
@@ -18,5 +19,6 @@ updates:
       - dependency-name: "@dome-layer/dome-ui"
   - package-ecosystem: "github-actions"
     directory: "/"
+    target-branch: "staging"
     schedule:
       interval: "monthly"
