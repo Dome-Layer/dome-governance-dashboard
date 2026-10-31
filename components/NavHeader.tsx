@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ToolHeader } from "@dome-layer/dome-ui";
 
 const navLinks = [
@@ -16,6 +17,7 @@ function renderLink(props: {
   className?: string;
   style?: React.CSSProperties;
   "aria-label"?: string;
+  "aria-current"?: "page";
   onClick?: () => void;
 }) {
   return (
@@ -24,6 +26,7 @@ function renderLink(props: {
       className={props.className}
       style={props.style}
       aria-label={props["aria-label"]}
+      aria-current={props["aria-current"]}
       onClick={props.onClick}
     >
       {props.children}
@@ -32,11 +35,14 @@ function renderLink(props: {
 }
 
 export function NavHeader() {
+  const pathname = usePathname();
+
   return (
     <ToolHeader
       toolName="Governance Dashboard"
       renderLink={renderLink}
       navLinks={navLinks}
+      currentPath={pathname ?? undefined}
     />
   );
 }
