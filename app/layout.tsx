@@ -5,6 +5,7 @@ import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 import { NavHeader } from "@/components/NavHeader";
 import { StagingBanner, ToolFooter } from "@dome-layer/dome-ui";
+import { THEME_INIT_SCRIPT } from "@dome-layer/dome-ui/utils";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -33,22 +34,6 @@ export const metadata: Metadata = {
   },
 };
 
-// Prevents a theme flash before first paint: reads dome-theme cookie (shared
-// across all *.domelayer.com subdomains) then falls back to localStorage.
-const themeScript = `
-(function() {
-  try {
-    var cookie = document.cookie.split('; ').find(function(r){ return r.startsWith('dome-theme='); });
-    var cookieVal = cookie ? cookie.split('=')[1] : null;
-    var saved = (cookieVal === 'dark' || cookieVal === 'light') ? cookieVal : localStorage.getItem('dome-theme');
-    var theme = (saved === 'dark' || saved === 'light')
-      ? saved
-      : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    document.documentElement.setAttribute('data-theme', theme);
-  } catch (e) {}
-})();
-`;
-
 export default function RootLayout({
   children,
 }: {
@@ -61,8 +46,9 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        {/* Sets the theme before first paint, so there is no flash; the rule lives in dome-ui. */}
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
       </head>
       <body className="flex flex-col min-h-screen">
         <StagingBanner environment={process.env.NEXT_PUBLIC_SENTRY_ENVIRONMENT} />
